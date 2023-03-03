@@ -1,22 +1,20 @@
 
-
 let bank = {
     apples: 0,
-    name: "margaret",
+    click: 1,
     clickTick() {
+        document.querySelector(".appleBank").addEventListener("click", bank.clickTick);
+        bank.apples += bank.click;
+        document.querySelector(".appleBank").innerText = bank.apples;
+    },
+    multiplier: 0,
+    interval: 0,
+    ticker() {
         bank.apples += bank.multiplier;
         document.querySelector(".appleBank").innerText = bank.apples;
-        return bank.apples;
-    },
-    multiplier: 1,
+    }
 };
-
-document.querySelector(".appleBank").addEventListener("click", bank.clickTick);
-console.log(bank.apples, bank.multiplier, bank.clickTick())
-
-let interval = 1000;
-
-setInterval(bank.clickTick, interval);
+bank.clickTick();
 
 let basket = {
     apples: 0,
@@ -29,3 +27,38 @@ let basket = {
 };
 
 document.querySelector(".basket").addEventListener("click", basket.gather);
+
+class PassiveUpgrade {
+    constructor(name, multiplier, interval, cost) {
+        this.name = name;
+        this.multiplier = multiplier;
+        this.interval = interval;
+        this.cost = cost;
+        this.purchased = false;
+        //document.querySelector(`.${this.name}`).addEventListener("click", function () { this.buy() });
+    };
+    multiply() {
+        bank.multiplier += this.multiplier;
+        bank.interval += this.interval;
+    };
+    buy() {
+        if (basket.apples > this.cost) {
+            basket.apples -= this.cost;
+            this.cost *= 1.1;
+            this.purchased = true;
+            this.multiply();
+            document.querySelector(".basket").innerText = basket.apples;
+        }
+    };
+
+}
+
+let granny = new PassiveUpgrade("granny", 1, 1000, 10);
+document.querySelector(".granny").addEventListener("click", function () {
+    if (granny.purchased) {
+        setInterval(bank.ticker, bank.interval);
+    }
+});
+let tractor = new PassiveUpgrade("tractor", 10, 1, 100)
+
+
