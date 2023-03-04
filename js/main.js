@@ -18,10 +18,18 @@ bank.clickTick();
 
 let basket = {
     apples: 0,
+    capacity: 10,
     gather() {
-        basket.apples += bank.apples;
+        if (bank.apples >= basket.capacity) {
+            basket.apples += basket.capacity;
+            bank.apples -= basket.capacity;
+        } else if (bank.apples <= basket.capacity) {
+            basket.apples += bank.apples;
+            bank.apples = 0;
+        }
+
+
         document.querySelector(".basket").innerText = Math.floor(basket.apples);
-        bank.apples = 0;
         document.querySelector(".appleBank").innerText = Math.floor(bank.apples);
     },
 };
@@ -48,6 +56,7 @@ class PassiveUpgrade {
             this.purchased = true;
             this.multiply();
             document.querySelector(".basket").innerText = Math.floor(basket.apples);
+            document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
         }
     };
 
