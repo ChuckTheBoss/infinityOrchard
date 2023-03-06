@@ -9,11 +9,12 @@ let basket = {
     multiplier: 0,
     ticker() {
         basket.apples += basket.multiplier;
-        console.log(basket.apples);
+        //console.log(basket.apples.toFixed(2));
         document.querySelector(".basket").innerText = Math.floor(basket.apples);
     }
 };
 document.querySelector(".basket").addEventListener("click", basket.clickTick);
+intervalSet = false;
 
 // let basket = {
 //     apples: 0,
@@ -43,7 +44,7 @@ class GrowUpgrade {
         document.querySelector(`.${this.name}`).addEventListener("click", this.buy.bind(this));
     };
     multiply() {
-        basket.multiplier += this.multiplier / 30;
+        basket.multiplier += (this.multiplier / 30);
     };
     buy() {
         if (basket.apples >= this.cost) {
@@ -53,14 +54,16 @@ class GrowUpgrade {
             this.multiply();
             document.querySelector(".basket").innerText = Math.floor(basket.apples);
             document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+            console.log(basket.multiplier);
         }
     };
 };
 
 let seed = new GrowUpgrade("seed", 0.1, 10);
 document.querySelector(".seed").addEventListener("click", function () {
-    if (seed.purchased) {
+    if (seed.purchased && !intervalSet) {
         setInterval(basket.ticker, 33.33);
+        intervalSet = true;
     }
 });
 let sapling = new GrowUpgrade("sapling", 1, 100);
