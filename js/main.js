@@ -12,31 +12,12 @@ let basket = {
         basket.apples += basket.multiplier;
         //console.log(basket.apples.toFixed(2));
         document.querySelector(".basket").innerText = Math.floor(basket.apples);
+        document.querySelector(".applesPerSec").innerText = Math.floor((basket.multiplier) * 300) / 10;
     }
 };
 document.querySelector(".basket").addEventListener("click", basket.clickTick);
 var intervalSet = false;
 var purchased = false;
-
-// let basket = {
-//     apples: 0,
-//     capacity: 10,
-//     interval: 1000,
-//     gather() {
-//         if (bank.apples >= basket.capacity) {
-//             basket.apples += basket.capacity;
-//             bank.apples -= basket.capacity;
-//         } else if (bank.apples <= basket.capacity) {
-//             basket.apples += bank.apples;
-//             bank.apples = 0;
-//         }
-//         document.querySelector(".basket").innerText = Math.floor(basket.apples);
-//         document.querySelector(".appleBank").innerText = Math.floor(bank.apples);
-//     },
-// };
-
-// document.querySelector(".basket").addEventListener("click", basket.gather);
-// setInterval(basket.gather, basket.interval);
 class GrowUpgrade {
     constructor(name, multiplier, cost) {
         this.name = name;
