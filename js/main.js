@@ -1,51 +1,49 @@
 
-let bank = {
+let basket = {
     apples: 0,
     click: 1,
     clickTick() {
-        bank.apples += bank.click;
-        document.querySelector(".appleBank").innerText = Math.floor(bank.apples);
+        basket.apples += basket.click;
+        document.querySelector(".basket").innerText = Math.floor(basket.apples);
     },
     multiplier: 0,
-    interval: 0,
     ticker() {
-        bank.apples += bank.multiplier;
-        document.querySelector(".appleBank").innerText = Math.floor(bank.apples);
+        basket.apples += basket.multiplier;
+        console.log(basket.apples);
+        document.querySelector(".basket").innerText = Math.floor(basket.apples);
     }
 };
-document.querySelector(".appleBank").addEventListener("click", bank.clickTick);
+document.querySelector(".basket").addEventListener("click", basket.clickTick);
 
-let basket = {
-    apples: 0,
-    capacity: 10,
-    interval: 1000,
-    gather() {
-        if (bank.apples >= basket.capacity) {
-            basket.apples += basket.capacity;
-            bank.apples -= basket.capacity;
-        } else if (bank.apples <= basket.capacity) {
-            basket.apples += bank.apples;
-            bank.apples = 0;
-        }
-        document.querySelector(".basket").innerText = Math.floor(basket.apples);
-        document.querySelector(".appleBank").innerText = Math.floor(bank.apples);
-    },
-};
+// let basket = {
+//     apples: 0,
+//     capacity: 10,
+//     interval: 1000,
+//     gather() {
+//         if (bank.apples >= basket.capacity) {
+//             basket.apples += basket.capacity;
+//             bank.apples -= basket.capacity;
+//         } else if (bank.apples <= basket.capacity) {
+//             basket.apples += bank.apples;
+//             bank.apples = 0;
+//         }
+//         document.querySelector(".basket").innerText = Math.floor(basket.apples);
+//         document.querySelector(".appleBank").innerText = Math.floor(bank.apples);
+//     },
+// };
 
-document.querySelector(".basket").addEventListener("click", basket.gather);
-setInterval(basket.gather, basket.interval);
+// document.querySelector(".basket").addEventListener("click", basket.gather);
+// setInterval(basket.gather, basket.interval);
 class GrowUpgrade {
-    constructor(name, multiplier, interval, cost) {
+    constructor(name, multiplier, cost) {
         this.name = name;
         this.multiplier = multiplier;
-        this.interval = interval;
         this.cost = cost;
         this.purchased = false;
         document.querySelector(`.${this.name}`).addEventListener("click", this.buy.bind(this));
     };
     multiply() {
-        bank.multiplier += this.multiplier;
-        bank.interval += this.interval;
+        basket.multiplier += this.multiplier / 30;
     };
     buy() {
         if (basket.apples >= this.cost) {
@@ -59,39 +57,10 @@ class GrowUpgrade {
     };
 };
 
-
-//Some repeated code with the GrowUpgrade, could probably condense this later.
-class GatherUpgrade {
-    constructor(name, capacity, interval, cost) {
-        this.name = name;
-        this.capacity = capacity;
-        this.interval = interval;
-        this.cost = cost;
-        this.purchased = false;
-        document.querySelector(`.${this.name}`).addEventListener("click", this.buy.bind(this));
-    };
-    multiply() {
-        basket.capacity += this.capacity;
-        basket.interval += this.interval;
-    };
-    buy() {
-        if (basket.apples >= this.cost) {
-            basket.apples -= this.cost;
-            this.cost *= 1.1;
-            this.purchased = true;
-            this.multiply();
-            document.querySelector(".basket").innerText = Math.floor(basket.apples);
-            document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
-        }
-    };
-};
-
-let seed = new GrowUpgrade("seed", 1, 1000, 10);
+let seed = new GrowUpgrade("seed", 0.1, 10);
 document.querySelector(".seed").addEventListener("click", function () {
     if (seed.purchased) {
-        setInterval(bank.ticker, bank.interval);
+        setInterval(basket.ticker, 33.33);
     }
 });
-let sapling = new GrowUpgrade("sapling", 10, 1, 100);
-let bucket = new GatherUpgrade("bucket", 10, 1, 10);
-let crate = new GatherUpgrade("crate", 100, 1, 100);
+let sapling = new GrowUpgrade("sapling", 1, 100);
