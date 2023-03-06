@@ -57,7 +57,34 @@ class GrowUpgrade {
             document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
         }
     };
-}
+};
+
+
+//Some repeated code with the GrowUpgrade, could probably condense this later.
+class GatherUpgrade {
+    constructor(name, capacity, interval, cost) {
+        this.name = name;
+        this.capacity = capacity;
+        this.interval = interval;
+        this.cost = cost;
+        this.purchased = false;
+        document.querySelector(`.${this.name}`).addEventListener("click", this.buy.bind(this));
+    };
+    multiply() {
+        basket.capacity += this.capacity;
+        basket.interval += this.interval;
+    };
+    buy() {
+        if (basket.apples >= this.cost) {
+            basket.apples -= this.cost;
+            this.cost *= 1.1;
+            this.purchased = true;
+            this.multiply();
+            document.querySelector(".basket").innerText = Math.floor(basket.apples);
+            document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+        }
+    };
+};
 
 let seed = new GrowUpgrade("seed", 1, 1000, 10);
 document.querySelector(".seed").addEventListener("click", function () {
@@ -65,4 +92,6 @@ document.querySelector(".seed").addEventListener("click", function () {
         setInterval(bank.ticker, bank.interval);
     }
 });
-let sapling = new GrowUpgrade("sapling", 10, 1, 100)
+let sapling = new GrowUpgrade("sapling", 10, 1, 100);
+let bucket = new GatherUpgrade("bucket", 10, 1, 10);
+let crate = new GatherUpgrade("crate", 100, 1, 100);
