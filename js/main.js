@@ -3,7 +3,6 @@ let bank = {
     apples: 0,
     click: 1,
     clickTick() {
-        document.querySelector(".appleBank").addEventListener("click", bank.clickTick);
         bank.apples += bank.click;
         document.querySelector(".appleBank").innerText = Math.floor(bank.apples);
     },
@@ -14,11 +13,12 @@ let bank = {
         document.querySelector(".appleBank").innerText = Math.floor(bank.apples);
     }
 };
-bank.clickTick();
+document.querySelector(".appleBank").addEventListener("click", bank.clickTick);
 
 let basket = {
     apples: 0,
     capacity: 10,
+    interval: 1000,
     gather() {
         if (bank.apples >= basket.capacity) {
             basket.apples += basket.capacity;
@@ -27,16 +27,14 @@ let basket = {
             basket.apples += bank.apples;
             bank.apples = 0;
         }
-
-
         document.querySelector(".basket").innerText = Math.floor(basket.apples);
         document.querySelector(".appleBank").innerText = Math.floor(bank.apples);
     },
 };
 
 document.querySelector(".basket").addEventListener("click", basket.gather);
-
-class PassiveUpgrade {
+setInterval(basket.gather, basket.interval);
+class GrowUpgrade {
     constructor(name, multiplier, interval, cost) {
         this.name = name;
         this.multiplier = multiplier;
@@ -50,7 +48,7 @@ class PassiveUpgrade {
         bank.interval += this.interval;
     };
     buy() {
-        if (basket.apples > this.cost) {
+        if (basket.apples >= this.cost) {
             basket.apples -= this.cost;
             this.cost *= 1.1;
             this.purchased = true;
@@ -59,13 +57,12 @@ class PassiveUpgrade {
             document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
         }
     };
-
 }
 
-let granny = new PassiveUpgrade("granny", 1, 1000, 10);
-document.querySelector(".granny").addEventListener("click", function () {
-    if (granny.purchased) {
+let seed = new GrowUpgrade("seed", 1, 1000, 10);
+document.querySelector(".seed").addEventListener("click", function () {
+    if (seed.purchased) {
         setInterval(bank.ticker, bank.interval);
     }
 });
-let tractor = new PassiveUpgrade("tractor", 10, 1, 100)
+let sapling = new GrowUpgrade("sapling", 10, 1, 100)
