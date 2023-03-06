@@ -1,6 +1,7 @@
 
 let basket = {
-    apples: 0,
+    //apples: 0,
+    apples: 100000,
     click: 1,
     clickTick() {
         basket.apples += basket.click;
@@ -14,7 +15,8 @@ let basket = {
     }
 };
 document.querySelector(".basket").addEventListener("click", basket.clickTick);
-intervalSet = false;
+var intervalSet = false;
+var purchased = false;
 
 // let basket = {
 //     apples: 0,
@@ -41,7 +43,9 @@ class GrowUpgrade {
         this.multiplier = multiplier;
         this.cost = cost;
         this.purchased = false;
+        this.count = 0;
         document.querySelector(`.${this.name}`).addEventListener("click", this.buy.bind(this));
+        document.querySelector(`.${this.name}.count`).innerText = this.count;
     };
     multiply() {
         basket.multiplier += (this.multiplier / 30);
@@ -50,20 +54,30 @@ class GrowUpgrade {
         if (basket.apples >= this.cost) {
             basket.apples -= this.cost;
             this.cost *= 1.1;
-            this.purchased = true;
+            purchased = true;
+            this.count += 1;
             this.multiply();
             document.querySelector(".basket").innerText = Math.floor(basket.apples);
             document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+            document.querySelector(`.${this.name}.count`).innerText = this.count;
             console.log(basket.multiplier);
         }
     };
 };
 
 let seed = new GrowUpgrade("seed", 0.1, 10);
-document.querySelector(".seed").addEventListener("click", function () {
-    if (seed.purchased && !intervalSet) {
-        setInterval(basket.ticker, 33.33);
-        intervalSet = true;
-    }
-});
 let sapling = new GrowUpgrade("sapling", 1, 100);
+let tree = new GrowUpgrade("tree", 10, 1000);
+let acre = new GrowUpgrade("acre", 100, 10000);
+let orchard = new GrowUpgrade("orchard", 1000, 100000);
+
+document.querySelectorAll(".button").forEach(upgrade => {
+    upgrade.addEventListener("click", function () {
+        if (purchased && !intervalSet) {
+            setInterval(basket.ticker, 33.33);
+            intervalSet = true;
+        }
+    });
+});
+
+
