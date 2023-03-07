@@ -14,12 +14,23 @@ let basket = {
     },
     multiplier: 0, // basically apples per second
     ticker() { // increases apple count per second
-        basket.apples += basket.multiplier;
-        //console.log(basket.apples.toFixed(2));
+        if (!bank.limit()) {
+            basket.apples += basket.multiplier;
+            //console.log(basket.apples.toFixed(2));
+        } else if (bank.limit()) {
+            basket.apples += bank.capacity;
+        };
         document.querySelector(".basket").innerText = Math.floor(basket.apples); //updates apples in the DOM
-        document.querySelector(".applesPerSec").innerText = Math.floor((basket.multiplier) * game.fps * 10) / 10; //updates apples/sec in the DOM
+        let applesSec = Math.floor((basket.multiplier) * game.fps * 10) / 10;
+        let applesSecLimit = Math.floor(bank.capacity * game.fps);
+        if (applesSec >= applesSecLimit) {
+            document.querySelector(".applesPerSec").innerText = applesSecLimit;
+        } else {
+            document.querySelector(".applesPerSec").innerText = applesSec;
+        }; //updates apples/sec in the DOM
     }
 };
+
 document.querySelector(".basket").addEventListener("click", basket.clickTick); //makes the number a button.
 // Don't start counting until a grower is purchased. 
 var intervalSet = false;
@@ -69,3 +80,44 @@ document.querySelectorAll(".button").forEach(upgrade => {
         }
     });
 });
+
+let bank = {
+    capacity: 10 / game.fps,
+    limit() { //limits apples/sec
+        if (basket.multiplier > bank.capacity) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+};
+class Gather {
+    constructor(name, capacity, cost) {
+        this.name = name;
+        this.capacity = capacity;
+        this.cost = cost;
+        this.purchased = false;
+        this.count = 0;
+        document.querySelector(`.${this.name}`).addEventListener("click", this.buy.bind(this));
+        document.querySelector(`.${this.name}.count`).innerText = this.count;
+    };
+    multiply() {
+        bank.capacity += this.capacity / game.fps;
+    };
+    buy() {
+        if (basket.apples >= this.cost) {
+            basket.apples -= this.cost;
+            this.cost *= 1.1;
+            this.purchased = true;
+            this.count += 1;
+            this.multiply();
+            document.querySelector(".basket").innerText = Math.floor(basket.apples);
+            document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+            document.querySelector(`.${this.name}.count`).innerText = this.count;
+        }
+    };
+};
+
+let granny = new Gather("granny", 10, 100)
+let farmHand = new Gather("farmHand", 100, 1000);
+let picker = new Gather("picker", 1000, 10000)
