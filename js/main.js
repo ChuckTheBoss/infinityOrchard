@@ -1,24 +1,31 @@
+// Quality of Life stuff are held in the game object. 
+let game = {
+    fps: 30,
+};
 
+// Basket contains the apple countand some associated functions
 let basket = {
     //apples: 0,
-    apples: 100000,
-    click: 1,
-    clickTick() {
+    apples: 100000, // starting apples
+    click: 1, // apples per mouse click
+    clickTick() { //increases apple count by clicking
         basket.apples += basket.click;
         document.querySelector(".basket").innerText = Math.floor(basket.apples);
     },
-    multiplier: 0,
-    ticker() {
+    multiplier: 0, // basically apples per second
+    ticker() { // increases apple count per second
         basket.apples += basket.multiplier;
         //console.log(basket.apples.toFixed(2));
-        document.querySelector(".basket").innerText = Math.floor(basket.apples);
-        document.querySelector(".applesPerSec").innerText = Math.floor((basket.multiplier) * 300) / 10;
+        document.querySelector(".basket").innerText = Math.floor(basket.apples); //updates apples in the DOM
+        document.querySelector(".applesPerSec").innerText = Math.floor((basket.multiplier) * game.fps * 10) / 10; //updates apples/sec in the DOM
     }
 };
-document.querySelector(".basket").addEventListener("click", basket.clickTick);
+document.querySelector(".basket").addEventListener("click", basket.clickTick); //makes the number a button.
+// Don't start counting until a grower is purchased. 
 var intervalSet = false;
 var purchased = false;
-class GrowUpgrade {
+//Grow class makes making upgrades SUPER easy. 
+class Grow {
     constructor(name, multiplier, cost) {
         this.name = name;
         this.multiplier = multiplier;
@@ -29,7 +36,7 @@ class GrowUpgrade {
         document.querySelector(`.${this.name}.count`).innerText = this.count;
     };
     multiply() {
-        basket.multiplier += (this.multiplier / 30);
+        basket.multiplier += (this.multiplier / game.fps);
     };
     buy() {
         if (basket.apples >= this.cost) {
@@ -46,19 +53,19 @@ class GrowUpgrade {
     };
 };
 
-let seed = new GrowUpgrade("seed", 0.1, 10);
-let sapling = new GrowUpgrade("sapling", 1, 100);
-let tree = new GrowUpgrade("tree", 10, 1000);
-let acre = new GrowUpgrade("acre", 100, 10000);
-let orchard = new GrowUpgrade("orchard", 1000, 100000);
+// Creates all the upgrades. 
+let seed = new Grow("seed", 0.1, 10);
+let sapling = new Grow("sapling", 1, 100);
+let tree = new Grow("tree", 10, 1000);
+let acre = new Grow("acre", 100, 10000);
+let orchard = new Grow("orchard", 1000, 100000);
 
+// Doesn't start increasing automatically unless a grower is bought. 
 document.querySelectorAll(".button").forEach(upgrade => {
     upgrade.addEventListener("click", function () {
         if (purchased && !intervalSet) {
-            setInterval(basket.ticker, 33.33);
+            setInterval(basket.ticker, (1 / game.fps) * 1000);
             intervalSet = true;
         }
     });
 });
-
-
