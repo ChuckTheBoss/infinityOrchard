@@ -5,8 +5,8 @@ let game = {
 
 // Basket contains the apple countand some associated functions
 let basket = {
-    //apples: 0,
-    apples: 100000, // starting apples
+    apples: 0,
+    //apples: 100000, // starting apples
     click: 1, // apples per mouse click
     clickTick() { //increases apple count by clicking
         basket.apples += basket.click;
@@ -54,12 +54,13 @@ class Grow {
             basket.apples -= this.cost;
             this.cost *= 1.1;
             purchased = true;
+            this.purchased = true;
             this.count += 1;
             this.multiply();
             document.querySelector(".basket").innerText = Math.floor(basket.apples);
             document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
             document.querySelector(`.${this.name}.count`).innerText = this.count;
-            console.log(basket.multiplier);
+            //console.log(basket.multiplier);
         }
     };
 };
@@ -118,6 +119,35 @@ class Gather {
     };
 };
 
-let granny = new Gather("granny", 10, 100)
-let farmHand = new Gather("farmHand", 100, 1000);
-let picker = new Gather("picker", 1000, 10000)
+let granny = new Gather("granny", 100, 100);
+let farmHand = new Gather("farmHand", 1000, 1000);
+let picker = new Gather("picker", 10000, 10000);
+
+class GrowUpgrade {
+    constructor(name, multiplier, cost, tiedTo) {
+        this.name = name;
+        this.multiplier = multiplier;
+        this.cost = cost;
+        this.purchased = false;
+        this.count = 0;
+        document.querySelector(`.${this.name}`).addEventListener("click", this.buy.bind(this));
+        document.querySelector(`.${this.name}.count`).innerText = this.count;
+    };
+    multiply() {
+        basket.multiplier += (this.multiplier / game.fps);
+    };
+    buy() {
+        if (basket.apples >= this.cost) {
+            basket.apples -= this.cost;
+            this.cost *= 1.1;
+            purchased = true;
+            this.purchased = true;
+            this.count += 1;
+            this.multiply();
+            document.querySelector(".basket").innerText = Math.floor(basket.apples);
+            document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+            document.querySelector(`.${this.name}.count`).innerText = this.count;
+            //console.log(basket.multiplier);
+        }
+    };
+};
