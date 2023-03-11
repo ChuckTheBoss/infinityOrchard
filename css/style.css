@@ -32,6 +32,11 @@ body {
 /*******************************************/
 header {}
 
+#mainApple {
+  width: 25%;
+  margin: 10% 0;
+}
+
 .upgrades {
   text-align: center;
   display: flex;
@@ -50,7 +55,14 @@ footer {}
 /* STATE
 /*******************************************/
 
+#mainApple {
 
+  transition: all 12s linear;
+}
+
+#mainApple:active {
+  transform: rotate(359deg);
+}
 
 
 /******************************************

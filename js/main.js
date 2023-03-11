@@ -2,6 +2,8 @@
 let game = {
     fps: 30,
 };
+//I use document.querySelector a lot, so this just makes it so I don't have to type it every time. 
+const dq = (element) => { return document.querySelector(element) };
 
 // Basket contains the apple countand some associated functions
 let basket = {
@@ -10,7 +12,7 @@ let basket = {
     click: 1, // apples per mouse click
     clickTick() { //increases apple count by clicking
         basket.apples += basket.click;
-        document.querySelector(".basket").innerText = Math.floor(basket.apples);
+        dq(".basket").innerText = Math.floor(basket.apples);
     },
     multiplier: 0, // basically apples per second
     ticker() { // increases apple count per second
@@ -20,18 +22,18 @@ let basket = {
         } else if (bank.limit()) {
             basket.apples += bank.capacity;
         };
-        document.querySelector(".basket").innerText = Math.floor(basket.apples); //updates apples in the DOM
+        dq(".basket").innerText = Math.floor(basket.apples); //updates apples in the DOM
         let applesSec = Math.floor((basket.multiplier) * game.fps * 10) / 10;
         let applesSecLimit = Math.floor(bank.capacity * game.fps);
         if (applesSec >= applesSecLimit) {
-            document.querySelector(".applesPerSec").innerText = applesSecLimit;
+            dq(".applesPerSec").innerText = applesSecLimit;
         } else {
-            document.querySelector(".applesPerSec").innerText = applesSec;
+            dq(".applesPerSec").innerText = applesSec;
         }; //updates apples/sec in the DOM
     }
 };
 
-document.querySelector(".basket").addEventListener("click", basket.clickTick); //makes the number a button.
+dq("#mainApple").addEventListener("mousedown", basket.clickTick); //makes the apple a button.
 // Don't start counting until a grower is purchased. 
 var intervalSet = false;
 var purchased = false;
@@ -43,8 +45,8 @@ class Grow {
         this.cost = cost;
         this.purchased = false;
         this.count = 0;
-        document.querySelector(`.${this.name}`).addEventListener("click", this.buy.bind(this));
-        document.querySelector(`.${this.name}.count`).innerText = this.count;
+        dq(`.${this.name}`).addEventListener("click", this.buy.bind(this));
+        dq(`.${this.name}.count`).innerText = this.count;
     };
     multiply() {
         basket.multiplier += (this.multiplier / game.fps);
@@ -57,9 +59,9 @@ class Grow {
             this.purchased = true;
             this.count += 1;
             this.multiply();
-            document.querySelector(".basket").innerText = Math.floor(basket.apples);
-            document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
-            document.querySelector(`.${this.name}.count`).innerText = this.count;
+            dq(".basket").innerText = Math.floor(basket.apples);
+            dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+            dq(`.${this.name}.count`).innerText = this.count;
             //console.log(basket.multiplier);
         }
     };
@@ -99,8 +101,8 @@ class Gather {
         this.cost = cost;
         this.purchased = false;
         this.count = 0;
-        document.querySelector(`.${this.name}`).addEventListener("click", this.buy.bind(this));
-        document.querySelector(`.${this.name}.count`).innerText = this.count;
+        dq(`.${this.name}`).addEventListener("click", this.buy.bind(this));
+        dq(`.${this.name}.count`).innerText = this.count;
     };
     multiply() {
         bank.capacity += this.capacity / game.fps;
@@ -112,9 +114,9 @@ class Gather {
             this.purchased = true;
             this.count += 1;
             this.multiply();
-            document.querySelector(".basket").innerText = Math.floor(basket.apples);
-            document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
-            document.querySelector(`.${this.name}.count`).innerText = this.count;
+            dq(".basket").innerText = Math.floor(basket.apples);
+            dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+            dq(`.${this.name}.count`).innerText = this.count;
         }
     };
 };
@@ -130,8 +132,8 @@ class GrowUpgrade {
         this.cost = cost;
         this.purchased = false;
         this.count = 0;
-        document.querySelector(`.${this.name}`).addEventListener("click", this.buy.bind(this));
-        document.querySelector(`.${this.name}.count`).innerText = this.count;
+        dq(`.${this.name}`).addEventListener("click", this.buy.bind(this));
+        dq(`.${this.name}.count`).innerText = this.count;
     };
     multiply() {
         basket.multiplier += (this.multiplier / game.fps);
@@ -144,9 +146,9 @@ class GrowUpgrade {
             this.purchased = true;
             this.count += 1;
             this.multiply();
-            document.querySelector(".basket").innerText = Math.floor(basket.apples);
-            document.querySelector(`.${this.name}.cost`).innerText = Math.floor(this.cost);
-            document.querySelector(`.${this.name}.count`).innerText = this.count;
+            dq(".basket").innerText = Math.floor(basket.apples);
+            dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+            dq(`.${this.name}.count`).innerText = this.count;
             //console.log(basket.multiplier);
         }
     };
