@@ -57,11 +57,33 @@ footer {}
 
 #mainApple {
 
-  transition: all 12s linear;
+  animation: 30s infinite linear rotate;
+  transition: all 1s ease-out;
 }
 
 #mainApple:active {
-  transform: rotate(359deg);
+  scale: 85%;
+  rotate: -15deg;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scale {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0.9);
+  }
 }
 
 

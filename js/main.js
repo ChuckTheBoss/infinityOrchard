@@ -1,6 +1,7 @@
 // Quality of Life stuff are held in the game object. 
 let game = {
     fps: 30,
+
 };
 //I use document.querySelector a lot, so this just makes it so I don't have to type it every time. 
 const dq = (element) => { return document.querySelector(element) };
@@ -30,10 +31,27 @@ let basket = {
         } else {
             dq(".applesPerSec").innerText = applesSec;
         }; //updates apples/sec in the DOM
+    },
+    mouseHold() {
+        onmousedown = () => {
+            basket.clickTick();
+            hold = setInterval(basket.clickTick, (1 / game.fps) * 10000);
+        };
+    },
+    mouseUnhold() {
+        clearInterval(hold);
+    },
+    mouseUnholdLeave() {
+        clearInterval(hold);
+        onmousedown = () => {
+            return false;
+        };
     }
 };
 
-dq("#mainApple").addEventListener("mousedown", basket.clickTick); //makes the apple a button.
+dq("#mainApple").addEventListener("mouseenter", basket.mouseHold); //makes the apple a button.
+dq("#mainApple").addEventListener("mouseleave", basket.mouseUnholdLeave);
+dq("body").addEventListener("mouseup", basket.mouseUnhold);
 // Don't start counting until a grower is purchased. 
 var intervalSet = false;
 var purchased = false;
