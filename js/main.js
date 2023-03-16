@@ -139,9 +139,9 @@ class Gather {
     };
 };
 
-let granny = new Gather("granny", 100, 100);
-let farmHand = new Gather("farmHand", 1000, 1000);
-let picker = new Gather("picker", 10000, 10000);
+let granny = new Gather("granny", 10, 1000);
+let farmHand = new Gather("farmHand", 100, 10000);
+let picker = new Gather("picker", 1000, 100000);
 
 class GrowUpgrade {
     constructor(name, multiplier, cost, tiedTo) {
