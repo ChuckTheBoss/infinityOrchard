@@ -1,7 +1,6 @@
 // Quality of Life stuff are held in the game object. 
 let game = {
     fps: 30,
-
 };
 //I use document.querySelector a lot, so this just makes it so I don't have to type it every time. 
 const dq = (element) => { return document.querySelector(element) };
@@ -9,22 +8,26 @@ const dq = (element) => { return document.querySelector(element) };
 // Basket contains the apple countand some associated functions
 let basket = {
     apples: 0,
-    //apples: 100000, // starting apples
+    // apples: 100000, // starting apples
     click: 1, // apples per mouse click
     clickTick() { //increases apple count by clicking
         basket.apples += basket.click;
         dq(".basket").innerText = Math.floor(basket.apples);
     },
-    multiplier: 0, // basically apples per second
+    multiplier() {
+        let perSecond = ((seed.multiply()) + (sapling.multiply()) + (tree.multiply()) + (acre.multiply()) + (orchard.multiply())) / game.fps;
+        //console.log(perSecond);
+        return perSecond
+    },
     ticker() { // increases apple count per second
         if (!bank.limit()) {
-            basket.apples += basket.multiplier;
+            basket.apples += basket.multiplier();
             //console.log(basket.apples.toFixed(2));
         } else if (bank.limit()) {
             basket.apples += bank.capacity;
         };
         dq(".basket").innerText = Math.floor(basket.apples); //updates apples in the DOM
-        let applesSec = Math.floor((basket.multiplier) * game.fps * 10) / 10;
+        let applesSec = Math.floor((basket.multiplier()) * game.fps * 10) / 10;
         let applesSecLimit = Math.floor(bank.capacity * game.fps);
         if (applesSec >= applesSecLimit) {
             dq(".applesPerSec").innerText = applesSecLimit;
@@ -63,11 +66,12 @@ class Grow {
         this.cost = cost;
         this.purchased = false;
         this.count = 0;
+        this.upgrade = 1;
         dq(`.${this.name}`).addEventListener("click", this.buy.bind(this));
         dq(`.${this.name}.count`).innerText = this.count;
     };
     multiply() {
-        basket.multiplier += (this.multiplier / game.fps);
+        return (this.multiplier * this.count * this.upgrade);
     };
     buy() {
         if (basket.apples >= this.cost) {
@@ -102,20 +106,11 @@ document.querySelectorAll(".button").forEach(upgrade => {
     });
 });
 
-let bank = {
-    capacity: 10 / game.fps,
-    limit() { //limits apples/sec
-        if (basket.multiplier > bank.capacity) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-};
+
 class Gather {
-    constructor(name, capacity, cost) {
+    constructor(name, multiplier, cost) {
         this.name = name;
-        this.capacity = capacity;
+        this.multiplier = multiplier;
         this.cost = cost;
         this.purchased = false;
         this.count = 0;
@@ -123,7 +118,8 @@ class Gather {
         dq(`.${this.name}.count`).innerText = this.count;
     };
     multiply() {
-        bank.capacity += this.capacity / game.fps;
+        return this.count * this.multiplier
+        //bank.capacity += this.capacity / game.fps;
     };
     buy() {
         if (basket.apples >= this.cost) {
@@ -148,26 +144,46 @@ class GrowUpgrade {
         this.name = name;
         this.multiplier = multiplier;
         this.cost = cost;
+        this.tiedTo = tiedTo;
         this.purchased = false;
         this.count = 0;
         dq(`.${this.name}`).addEventListener("click", this.buy.bind(this));
         dq(`.${this.name}.count`).innerText = this.count;
     };
     multiply() {
-        basket.multiplier += (this.multiplier / game.fps);
+        const upgradeTarget = this.tiedTo;
+        upgradeTarget.multiplier *= (this.multiplier);
     };
     buy() {
         if (basket.apples >= this.cost) {
             basket.apples -= this.cost;
-            this.cost *= 1.1;
-            purchased = true;
             this.purchased = true;
+            this.cost *= 1.1;
             this.count += 1;
             this.multiply();
             dq(".basket").innerText = Math.floor(basket.apples);
             dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
             dq(`.${this.name}.count`).innerText = this.count;
-            //console.log(basket.multiplier);
+            dq(`.${this.name}`).removeEventListener("click", this.buy.bind(this))
+            console.log(basket.multiplier);
         }
     };
+};
+
+let fertilizer = new GrowUpgrade("fertilizer", 1.1, 100, seed)
+let tiller = new GrowUpgrade("tiller", 1.1, 1000, sapling)
+let automaticSprinklers = new GrowUpgrade("automaticSprinklers", 1.1, 10000, tree)
+let glasses = new GrowUpgrade("glasses", 1.1, 1000, granny)
+
+
+let bank = {
+    capacity: 10,
+    limit() { //limits apples/sec
+        this.capacity = (10 + (granny.multiply()) + (farmHand.multiply()) + (picker.multiply())) / game.fps;
+        if (basket.multiplier > bank.capacity) {
+            return true;
+        } else {
+            return false;
+        }
+    },
 };
