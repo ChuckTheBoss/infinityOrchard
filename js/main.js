@@ -2,9 +2,47 @@
 let game = {
     fps: 30,
 };
+
 //I use document.querySelector a lot, so this just makes it so I don't have to type it every time. 
 const dq = (element) => { return document.querySelector(element) };
 
+//SAVE GAME
+// things I need to save: 
+//  total apples,
+//  seeds, sapplings, trees, acres, orchards. Count and cost
+//  grannys, farmhands, pickers, count and cost. 
+//  upgrades count and cost. 
+let saveGame = () => {
+    const saveData = [{ "currentBasketApples": basket.apples },
+    { "currentCostSeeds": seed.cost },
+    { "currentCountSeeds": seed.count },
+    { "currentCostSaplings": sapling.cost },
+    { "currentCountSaplings": sapling.count },
+    { "currentCostTrees": tree.cost },
+    { "currentCountTrees": tree.count },
+    { "currentCostAcres": acre.cost },
+    { "currentCountAcres": acre.count },
+    { "currentCostOrchards": orchard.cost },
+    { "currentCountOrchards": orchard.count }]
+    // if (!localStorage.getItem("currentBasketApples")) {
+    //     localStorage.setItem("currentBasketApples", basket.apples);
+    // } else if (basket.apples !== localStorage.getItem("currentBasketApples")) {
+    //     localStorage.setItem("currentBasketApples", basket.apples)
+    // }
+    saveData.forEach(obj => {
+        console.log(obj, Object.keys(obj), Object.values(obj))
+        if (!localStorage.getItem(Object.keys(obj))) {
+            localStorage.setItem(Object.keys(obj), Object.values(obj));
+        } else if (Object.values(obj) !== localStorage.getItem(Object.keys(obj))) {
+            localStorage.setItem(Object.keys(obj), Object.values(obj))
+        }
+    });
+}
+let loadGame = () => {
+
+}
+dq(".save").addEventListener("click", saveGame);
+dq(".load").addEventListener("click", loadGame);
 // Basket contains the apple countand some associated functions
 let basket = {
     apples: 0,
