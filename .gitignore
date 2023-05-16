@@ -131,3 +131,5 @@ dist
 
 #Mac Folder macros
 *.DS_Store
+
+notes.md

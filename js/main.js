@@ -1,10 +1,93 @@
 // Quality of Life stuff are held in the game object. 
 let game = {
     fps: 30,
+    saveData: () => {
+        return [
+            { "currentBasketApples": basket.apples },
+            { "currentCostSeeds": seed.cost },
+            { "currentCountSeeds": seed.count },
+            { "currentCostSaplings": sapling.cost },
+            { "currentCountSaplings": sapling.count },
+            { "currentCostTrees": tree.cost },
+            { "currentCountTrees": tree.count },
+            { "currentCostAcres": acre.cost },
+            { "currentCountAcres": acre.count },
+            { "currentCostOrchards": orchard.cost },
+            { "currentCountOrchards": orchard.count },
+            { "currentCostGrannys": granny.cost },
+            { "currentCountGrannys": granny.count },
+            { "currentCostFarmHands": farmHand.cost },
+            { "currentCountFarmHands": farmHand.count },
+            { "currentCostPickers": picker.cost },
+            { "currentCountPickers": picker.count },
+        ]
+    },
+    saveGame: () => {
+        game.saveData().forEach(obj => {
+            //console.log(obj, Object.keys(obj), Object.values(obj))
+            if (!localStorage.getItem(Object.keys(obj))) {
+                localStorage.setItem(Object.keys(obj), Object.values(obj));
+            } else if (Object.values(obj) !== localStorage.getItem(Object.values(obj))) {
+                localStorage.setItem(Object.keys(obj), Object.values(obj))
+            }
+        });
+        console.log(localStorage);
+    },
+    loadGame: () => {
+        game.saveData().forEach(obj => {
+            //console.log(obj, Object.keys(obj), Object.values(obj))
+            if (!localStorage.getItem(Object.keys(obj))) {
+                console.log("No save data found");
+                return "No save data found";
+            } else {
+            }
+            localStorage.getItem(Object.keys(obj), Object.values(obj))
+            basket.apples = Number(localStorage.getItem("currentBasketApples"))
+            seed.cost = Number(localStorage.getItem("currentCostSeeds"))
+            seed.count = Number(localStorage.getItem("currentCountSeeds"))
+            seed.buy()
+            sapling.cost = Number(localStorage.getItem("currentCostSaplings"))
+            sapling.count = Number(localStorage.getItem("currentCountSaplings"))
+            sapling.buy()
+            tree.cost = Number(localStorage.getItem("currentCostTrees"))
+            tree.count = Number(localStorage.getItem("currentCountTrees"))
+            tree.buy();
+            acre.cost = Number(localStorage.getItem("currentCostAcres"))
+            acre.count = Number(localStorage.getItem("currentCountAcres"))
+            acre.buy();
+            orchard.cost = Number(localStorage.getItem("currentCostOrchards"))
+            orchard.count = Number(localStorage.getItem("currentCountOrchards"))
+            orchard.buy();
+            granny.cost = Number(localStorage.getItem("currentCostGrannys"))
+            granny.count = Number(localStorage.getItem("currentCountGrannys"))
+            granny.buy();
+            farmHand.cost = Number(localStorage.getItem("currentCostFarmHands"))
+            farmHand.count = Number(localStorage.getItem("currentCountFarmHands"))
+            farmHand.buy();
+            picker.cost = Number(localStorage.getItem("currentCostPickers"))
+            picker.count = Number(localStorage.getItem("currentCountPickers"))
+            picker.buy();
+            this.purchased = true;
+            basket.clickTick();
+            basket.ticker();
+            startGrowing();
+        });
+        console.log(localStorage);
+    }
 };
+
 //I use document.querySelector a lot, so this just makes it so I don't have to type it every time. 
 const dq = (element) => { return document.querySelector(element) };
 
+//SAVE GAME
+// things I need to save: 
+//  total apples,
+//  seeds, sapplings, trees, acres, orchards. Count and cost
+//  grannys, farmhands, pickers, count and cost. 
+//  upgrades count and cost. 
+
+dq(".save").addEventListener("click", game.saveGame);
+dq(".load").addEventListener("click", game.loadGame);
 // Basket contains the apple countand some associated functions
 let basket = {
     apples: 0,
@@ -81,11 +164,12 @@ class Grow {
             this.purchased = true;
             this.count += 1;
             this.multiply();
-            dq(".basket").innerText = Math.floor(basket.apples);
-            dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
-            dq(`.${this.name}.count`).innerText = this.count;
-            //console.log(basket.multiplier);
         }
+        dq(".basket").innerText = Math.floor(basket.apples);
+        dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+        dq(`.${this.name}.count`).innerText = this.count;
+        //console.log(basket.multiplier);
+
     };
 };
 
@@ -97,14 +181,17 @@ let acre = new Grow("acre", 100, 10000);
 let orchard = new Grow("orchard", 1000, 100000);
 
 // Doesn't start increasing automatically unless a grower is bought. 
-document.querySelectorAll(".button").forEach(upgrade => {
-    upgrade.addEventListener("click", function () {
-        if (purchased && !intervalSet) {
-            setInterval(basket.ticker, (1 / game.fps) * 1000);
-            intervalSet = true;
-        }
-    });
-});
+function startGrowing() {
+    document.querySelectorAll(".button").forEach(upgrade => {
+        upgrade.addEventListener("click", function () {
+            if (purchased && !intervalSet) {
+                setInterval(basket.ticker, (1 / game.fps) * 1000);
+                intervalSet = true;
+            }
+        });
+    })
+};
+startGrowing();
 
 
 class Gather {
@@ -127,11 +214,11 @@ class Gather {
             this.cost *= 1.1;
             this.purchased = true;
             this.count += 1;
-            this.multiply();
-            dq(".basket").innerText = Math.floor(basket.apples);
-            dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
-            dq(`.${this.name}.count`).innerText = this.count;
         }
+        this.multiply();
+        dq(".basket").innerText = Math.floor(basket.apples);
+        dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+        dq(`.${this.name}.count`).innerText = this.count;
     };
 };
 
