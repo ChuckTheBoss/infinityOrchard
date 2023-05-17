@@ -34,7 +34,23 @@ header {}
 
 #mainApple {
   width: 25%;
-  margin: 10% 0;
+  margin: 7% 0;
+}
+
+.basket {
+  font-size: 4em;
+
+  display: inline;
+  padding: 0 1%;
+}
+
+.basketContainer {
+  padding: 1em;
+}
+
+.applesPerSec {
+  display: inline;
+  padding: 0 1%;
 }
 
 .upgrades {
@@ -54,6 +70,8 @@ footer {}
 /******************************************
 /* STATE
 /*******************************************/
+
+/* Big Apple */
 
 #mainApple {
 
@@ -90,7 +108,17 @@ footer {}
 /******************************************
 /* THEME
 /*******************************************/
+html {
+  min-height: 100%;
+  background-color: rgb(53, 75, 1);
+  background-image: url("../assets/images/small-orchard.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
 
-.basket {
-  font-size: 4em;
+  background-size: cover;
+}
+
+body {
+  color: rgb(95, 54, 54);
+  font-size: 2rem;
 }

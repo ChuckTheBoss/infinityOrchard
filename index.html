@@ -1,128 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-  	<meta charset="utf-8">
-  	<meta name="Infinity Orchard" content="An idle game to get apples. ">
-  	<meta name="keywords" content="idle, game, apples, infinity, orchard">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<title>Infinity Orchard</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="Infinity Orchard" content="An idle game to get apples. " />
+        <meta name="keywords" content="idle, game, apples, infinity, orchard" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<!-- external CSS link -->
-		<link rel="stylesheet" href="css/style.css">
-	</head>
-	<body>
-		<section class="mainApple">
-			<img src="assets/images/apple1.png" alt="A big, bright, shiny, juicy apple." id="mainApple" draggable="false">
-		</section>
-		
-		<h1>Apples</h1>
-		<p class="basket">0</p>
+        <title>Infinity Orchard</title>
 
-		<h3>Apples/sec</h3>
-		<p class="applesPerSec">0</p>
-		<button class="button save">Save Game!</button>
-		<button class="button load">Load Game!</button>
-		<div class="upgrades">
-			<table>
-				<tr>
-					<th>Grow</th>
-					<th>Cost</th>
-					<th>Description</th>
-					<th>Owned</th>
-				</tr>
-				<tr>
-					<td class="button seed"><button>Plant a Seed</button></td>
-					<td class="cost seed">10</td>
-					<td class="result seed">Makes 1 apple every 10 seconds.</td>
-					<td class="count seed"></td>
-				</tr>
-				<tr>
-					<td class="button sapling"><button>Plant a Sapling</button></td>
-					<td class="cost sapling">100</td>
-					<td class="result sapling">Makes 1 apple per second</td>
-					<td class="count sapling"></td>
-				</tr>
-				<tr>
-					<td class="button tree"><button>Plant a Tree</button></td>
-					<td class="cost tree">1000</td>
-					<td class="result tree">Makes 10 apples per second</td>
-					<td class="count tree"></td>
-				</tr>
-				<tr>
-					<td class="button acre"><button>Acre</button></td>
-					<td class="cost acre">10000</td>
-					<td class="result acre">Makes 100 apples per second</td>
-					<td class="count acre"></td>
-				</tr>
-				<tr>
-					<td class="button orchard"><button>Orchard</button></td>
-					<td class="cost orchard">100000</td>
-					<td class="result orchard">Makes 1000 apples per second</td>
-					<td class="count orchard"></td>
-				</tr>
-			</table>
-			<table>
-				<tr>
-					<th>Gather</th>
-					<th>Cost</th>
-					<th>Description</th>
-					<th>Owned</th>
-				</tr>
-				<tr>
-					<td class="button granny"><button>Granny Smith</button></td>
-					<td class="cost granny">1000</td>
-					<td class="result granny">Increases apples per second capacity by 10</td>
-					<td class="count granny">0</td>
-				</tr>
-				<tr>
-					<td class="sapling farmHand"><button>Farm Hand</button></td>
-					<td class="cost farmHand">10000</td>
-					<td class="result farmHand">Increases apples per second capacity by 100</td>
-					<td class="count farmHand">0</td>
-				</tr>
-				<tr>
-					<td class="button picker"><button>Apple Pickers</button></td>
-					<td class="cost picker">100000</td>
-					<td class="result picker">Increases apples per second capacity by 1000</td>
-					<td class="count picker">0</td>
-				</tr>
-			</table>
-			<table>
-				<tr>
-					<th>Upgrade</th>
-					<th>Cost</th>
-					<th>Description</th>
-					<th>Owned</th>
-				</tr>
-				<tr>
-					<td class="button fertilizer"><button>Fertilizer</button></td>
-					<td class="cost fertilizer">100</td>
-					<td class="result fertilizer">Increases Seed growth by 10%</td>
-					<td class="count fertilizer">0</td>
-				</tr>
-				<tr>
-					<td class="sapling tiller"><button>Tiller</button></td>
-					<td class="cost tiller">1000</td>
-					<td class="result tiller">Increases Sapling growth by 10%</td>
-					<td class="count tiller">0</td>
-				</tr>
-				<tr>
-					<td class="button automaticSprinklers"><button>Automatic Sprinklers</button></td>
-					<td class="cost automaticSprinklers">10000</td>
-					<td class="result automaticSprinklers">Increases Tree growth by 10%</td>
-					<td class="count automaticSprinklers">0</td>
-				</tr>
-				<tr>
-					<td class="button glasses"><button>Glasses</button></td>
-					<td class="cost glasses">1000</td>
-					<td class="result glasses">Increases Granny capacity by 10%</td>
-					<td class="count glasses">0</td>
-				</tr>
-			</table>
-		</div>
-		
+        <!-- external CSS link -->
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <section class="mainApple">
+            <img
+                src="assets/images/apple1.png"
+                alt="A big, bright, shiny, juicy apple."
+                id="mainApple"
+                draggable="false"
+            />
+        </section>
+        <div class="basketContainer">
+            <h1 class="basket">0</h1> 
+            <h1 class="basket" id="theWordApples">apples</h1>
+        </div>
+        <div class="bankContainer">
+            <h3 class="applesPerSec">0</h3>
+            <h3 class="bank applesPerSec">apples/sec</h3>
+            
+        </div>
+        <br />
 
-		<script type="text/javascript" src="js/main.js"></script>
-	</body>
+        <br />
+        <button class="button save">Save Game!</button>
+        <button class="button load">Load Game!</button>
+        <div class="upgrades">
+            <table>
+                <tr>
+                    <th>Grow</th>
+                    <th>Cost</th>
+                    <th>Description</th>
+                    <th>Owned</th>
+                </tr>
+                <tr>
+                    <td class="button seed"><button>Plant a Seed</button></td>
+                    <td class="cost seed">10</td>
+                    <td class="result seed">Makes 1 apple every 10 seconds.</td>
+                    <td class="count seed"></td>
+                </tr>
+                <tr>
+                    <td class="button sapling">
+                        <button>Plant a Sapling</button>
+                    </td>
+                    <td class="cost sapling">100</td>
+                    <td class="result sapling">Makes 1 apple per second</td>
+                    <td class="count sapling"></td>
+                </tr>
+                <tr>
+                    <td class="button tree"><button>Plant a Tree</button></td>
+                    <td class="cost tree">1000</td>
+                    <td class="result tree">Makes 10 apples per second</td>
+                    <td class="count tree"></td>
+                </tr>
+                <tr>
+                    <td class="button acre"><button>Acre</button></td>
+                    <td class="cost acre">10000</td>
+                    <td class="result acre">Makes 100 apples per second</td>
+                    <td class="count acre"></td>
+                </tr>
+                <tr>
+                    <td class="button orchard"><button>Orchard</button></td>
+                    <td class="cost orchard">100000</td>
+                    <td class="result orchard">Makes 1000 apples per second</td>
+                    <td class="count orchard"></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Gather</th>
+                    <th>Cost</th>
+                    <th>Description</th>
+                    <th>Owned</th>
+                </tr>
+                <tr>
+                    <td class="button granny"><button>Granny Smith</button></td>
+                    <td class="cost granny">1000</td>
+                    <td class="result granny">
+                        Increases apples per second capacity by 10
+                    </td>
+                    <td class="count granny">0</td>
+                </tr>
+                <tr>
+                    <td class="sapling farmHand"><button>Farm Hand</button></td>
+                    <td class="cost farmHand">10000</td>
+                    <td class="result farmHand">
+                        Increases apples per second capacity by 100
+                    </td>
+                    <td class="count farmHand">0</td>
+                </tr>
+                <tr>
+                    <td class="button picker">
+                        <button>Apple Pickers</button>
+                    </td>
+                    <td class="cost picker">100000</td>
+                    <td class="result picker">
+                        Increases apples per second capacity by 1000
+                    </td>
+                    <td class="count picker">0</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Upgrade</th>
+                    <th>Cost</th>
+                    <th>Description</th>
+                    <th>Owned</th>
+                </tr>
+                <tr>
+                    <td class="button fertilizer">
+                        <button>Fertilizer</button>
+                    </td>
+                    <td class="cost fertilizer">100</td>
+                    <td class="result fertilizer">
+                        Increases Seed growth by 10%
+                    </td>
+                    <td class="count fertilizer">0</td>
+                </tr>
+                <tr>
+                    <td class="sapling tiller"><button>Tiller</button></td>
+                    <td class="cost tiller">1000</td>
+                    <td class="result tiller">
+                        Increases Sapling growth by 10%
+                    </td>
+                    <td class="count tiller">0</td>
+                </tr>
+                <tr>
+                    <td class="button automaticSprinklers">
+                        <button>Automatic Sprinklers</button>
+                    </td>
+                    <td class="cost automaticSprinklers">10000</td>
+                    <td class="result automaticSprinklers">
+                        Increases Tree growth by 10%
+                    </td>
+                    <td class="count automaticSprinklers">0</td>
+                </tr>
+                <tr>
+                    <td class="button glasses"><button>Glasses</button></td>
+                    <td class="cost glasses">1000</td>
+                    <td class="result glasses">
+                        Increases Granny capacity by 10%
+                    </td>
+                    <td class="count glasses">0</td>
+                </tr>
+            </table>
+        </div>
+
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
 </html>
