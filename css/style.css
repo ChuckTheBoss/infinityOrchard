@@ -39,7 +39,6 @@ header {}
 
 .basket {
   font-size: 4em;
-
   display: inline;
   padding: 0 1%;
 }
@@ -53,11 +52,56 @@ header {}
   padding: 0 1%;
 }
 
-.upgrades {
-  text-align: center;
+.thingsToBuy {
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.growerItem {
+  width: 37.5%;
+  background-color: green;
+}
+
+.growerItemMainBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+}
+
+
+.boxItemImage {
+  flex-shrink: 1;
+}
+
+.boxItemCost {
+  flex-basis: 10%;
+  flex-shrink: 1;
+}
+
+.boxItemName {
+  flex-basis: 40%;
+  flex-grow: 2;
+  flex-shrink: 1;
+  font-size: 2em;
+}
+
+.boxitemCount {
+  flex-basis: 20%;
+  flex-shrink: 1;
+}
+
+.boxItemDescription {
+  font-size: .75em;
+  font-style: italic;
+  text-align: left;
+}
+
+.boxItemQuote {
+  font-size: .6em;
+  text-align: right;
 }
 
 footer {}

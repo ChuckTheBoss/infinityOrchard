@@ -78,6 +78,7 @@ let game = {
 
 //I use document.querySelector a lot, so this just makes it so I don't have to type it every time. 
 const dq = (element) => { return document.querySelector(element) };
+const dqa = (element) => { return document.querySelector(element) };
 
 //SAVE GAME
 // things I need to save: 
@@ -169,7 +170,6 @@ class Grow {
         dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
         dq(`.${this.name}.count`).innerText = this.count;
         //console.log(basket.multiplier);
-
     };
 };
 
@@ -182,7 +182,7 @@ let orchard = new Grow("orchard", 1000, 100000);
 
 // Doesn't start increasing automatically unless a grower is bought. 
 function startGrowing() {
-    document.querySelectorAll(".button").forEach(upgrade => {
+    document.querySelectorAll(".growerItem").forEach(upgrade => {
         upgrade.addEventListener("click", function () {
             if (purchased && !intervalSet) {
                 setInterval(basket.ticker, (1 / game.fps) * 1000);
@@ -226,41 +226,41 @@ let granny = new Gather("granny", 10, 1000);
 let farmHand = new Gather("farmHand", 100, 10000);
 let picker = new Gather("picker", 1000, 100000);
 
-class GrowUpgrade {
-    constructor(name, multiplier, cost, tiedTo) {
-        this.name = name;
-        this.multiplier = multiplier;
-        this.cost = cost;
-        this.tiedTo = tiedTo;
-        this.purchased = false;
-        this.count = 0;
-        dq(`.${this.name}`).addEventListener("click", this.buy.bind(this));
-        dq(`.${this.name}.count`).innerText = this.count;
-    };
-    multiply() {
-        const upgradeTarget = this.tiedTo;
-        upgradeTarget.multiplier *= (this.multiplier);
-    };
-    buy() {
-        if (basket.apples >= this.cost) {
-            basket.apples -= this.cost;
-            this.purchased = true;
-            this.cost *= 1.1;
-            this.count += 1;
-            this.multiply();
-            dq(".basket").innerText = Math.floor(basket.apples);
-            dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
-            dq(`.${this.name}.count`).innerText = this.count;
-            dq(`.${this.name}`).removeEventListener("click", this.buy.bind(this))
-            console.log(basket.multiplier);
-        }
-    };
-};
+// class GrowUpgrade {
+//     constructor(name, multiplier, cost, tiedTo) {
+//         this.name = name;
+//         this.multiplier = multiplier;
+//         this.cost = cost;
+//         this.tiedTo = tiedTo;
+//         this.purchased = false;
+//         this.count = 0;
+//         dq(`.${this.name}`).addEventListener("click", this.buy.bind(this));
+//         dq(`.${this.name}.count`).innerText = this.count;
+//     };
+//     multiply() {
+//         const upgradeTarget = this.tiedTo;
+//         upgradeTarget.multiplier *= (this.multiplier);
+//     };
+//     buy() {
+//         if (basket.apples >= this.cost) {
+//             basket.apples -= this.cost;
+//             this.purchased = true;
+//             this.cost *= 1.1;
+//             this.count += 1;
+//             this.multiply();
+//             dq(".basket").innerText = Math.floor(basket.apples);
+//             dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+//             dq(`.${this.name}.count`).innerText = this.count;
+//             dq(`.${this.name}`).removeEventListener("click", this.buy.bind(this))
+//             console.log(basket.multiplier);
+//         }
+//     };
+// };
 
-let fertilizer = new GrowUpgrade("fertilizer", 1.1, 100, seed)
-let tiller = new GrowUpgrade("tiller", 1.1, 1000, sapling)
-let automaticSprinklers = new GrowUpgrade("automaticSprinklers", 1.1, 10000, tree)
-let glasses = new GrowUpgrade("glasses", 1.1, 1000, granny)
+// let fertilizer = new GrowUpgrade("fertilizer", 1.1, 100, seed)
+// let tiller = new GrowUpgrade("tiller", 1.1, 1000, sapling)
+// let automaticSprinklers = new GrowUpgrade("automaticSprinklers", 1.1, 10000, tree)
+// let glasses = new GrowUpgrade("glasses", 1.1, 1000, granny)
 
 
 let bank = {
