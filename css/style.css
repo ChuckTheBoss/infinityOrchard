@@ -32,15 +32,29 @@ body {
 /*******************************************/
 header {}
 
+/* APPLE BASKET AND BANK */
+.basketContainer,
+.bankContainer {
+  background: radial-gradient(ellipse closest-side, green 20%, transparent);
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.bankContainer {
+  width: 30%;
+}
+
 #mainApple {
   width: 25%;
   margin: 7% 0;
 }
 
 .basket {
-  font-size: 4em;
+  font-size: 3em;
   display: inline;
-  padding: 0 1%;
+  padding: 0 8%;
 }
 
 .basketContainer {
@@ -49,9 +63,10 @@ header {}
 
 .applesPerSec {
   display: inline;
-  padding: 0 1%;
+  padding: 0 5%;
 }
 
+/* GROWERS */
 .thingsToBuy {
   display: flex;
   flex-direction: column;
@@ -60,8 +75,9 @@ header {}
 }
 
 .growerItem {
-  width: 37.5%;
-  background-color: green;
+  background: radial-gradient(at 0% 0%, rgb(104, 49, 49), green 40%, transparent 90%);
+  border: ridge 15px rgb(104, 49, 49);
+  padding: 15px;
 }
 
 .growerItemMainBox {
@@ -71,6 +87,10 @@ header {}
   height: 100px;
 }
 
+.growerItem * {
+  margin: 10px;
+}
+
 
 .boxItemImage {
   flex-shrink: 1;
@@ -78,19 +98,21 @@ header {}
 
 .boxItemCost {
   flex-basis: 10%;
-  flex-shrink: 1;
+  flex-shrink: 0;
+  font-size: .75em;
 }
 
 .boxItemName {
   flex-basis: 40%;
   flex-grow: 2;
-  flex-shrink: 1;
   font-size: 2em;
+  justify-self: center;
 }
 
 .boxitemCount {
   flex-basis: 20%;
-  flex-shrink: 1;
+  flex-shrink: 0;
+  font-size: .75em;
 }
 
 .boxItemDescription {
@@ -163,6 +185,7 @@ html {
 }
 
 body {
-  color: rgb(95, 54, 54);
+  color: white;
   font-size: 2rem;
+  font-family: 'Cabin', sans-serif;
 }

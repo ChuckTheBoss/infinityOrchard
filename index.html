@@ -9,6 +9,9 @@
         <title>Infinity Orchard</title>
 
         <!-- external CSS link -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/style.css" />
     </head>
@@ -22,47 +25,78 @@
                     draggable="false"
                 />
             </section>
-            <div class="basketContainer">
-                <h1 class="basket">0</h1> 
-                <h1 class="basket" id="theWordApples">apples</h1>
-            </div>
-            <div class="bankContainer">
-                <h3 class="applesPerSec">0</h3>
-                <h3 class="bank applesPerSec">apples/sec</h3>
-                
-            </div>
-            <button class="button save">Save Game!</button>
-            <button class="button load">Load Game!</button>
+            <section class="basketBankSave">
+                <div class="basketContainer">
+                    <h1 class="basket">0</h1> 
+                    <h1 class="basket" id="theWordApples">apples</h1>
+                </div>
+                <div class="bankContainer">
+                    <h3 class="applesPerSec">0</h3>
+                    <h3 class="bank applesPerSec">apples/sec</h3>
+                    
+                </div>
+                <button class="button save">Save Game!</button>
+                <button class="button load">Load Game!</button>
+            </section>
+
         </section>
         <section class="thingsToBuy">
             <div class="grow">
-                <table>
-                    <tr>
-                        <th>Grow</th>
-                        <th>Cost</th>
-                        <th>Owned</th>
-                    </tr>
-                    <tr>
-                        <td class="button sapling"><button>Sapling</button></td>
-                        <td class="cost sapling">100</td>
-                        <td class="count sapling"></td>
-                    </tr>
-                    <tr>
-                        <td class="button tree"><button>Tree</button></td>
-                        <td class="cost tree">1000</td>
-                        <td class="count tree"></td>
-                    </tr>
-                    <tr>
-                        <td class="button acre"><button>Acre</button></td>
-                        <td class="cost acre">10000</td>
-                        <td class="count acre"></td>
-                    </tr>
-                    <tr>
-                        <td class="button orchard"><button>Orchard</button></td>
-                        <td class="cost orchard">100000</td>
-                        <td class="count orchard"></td>
-                    </tr>
-                </table>
+                <div class="growerItem itemBox seed">
+                    <div class="growerItemMainBox itemBox">
+                        <p class="boxItem boxItemCost seed cost">10</p>
+                        <p class="boxItem boxItemName seed button">Seeds</p>
+                        <p class="boxItem boxItemCount seed count">0</p>
+                    </div>
+                    <div class="growerItemSubBox itemBox">
+                        <p class="boxItem boxItemDescription">Makes 1 apple every 10 seconds</p>
+                        <p class="boxItem boxItemQuote">"Even the tallest redwood came from a tiny seed"</p>
+                    </div>
+                </div>
+                <div class="growerItem itemBox sapling">
+                    <div class="growerItemMainBox itemBox">
+                        <p class="boxItem boxItemCost sapling cost">100</p>
+                        <p class="boxItem boxItemName sapling button">Saplings</p>
+                        <p class="boxItem boxItemCount sapling count">0</p>
+                    </div>
+                    <div class="growerItemSubBox itemBox">
+                        <p class="boxItem boxItemDescription">Makes 1 apple every second</p>
+                        <p class="boxItem boxItemQuote">"Such a young sap"</p>
+                    </div>
+                </div>
+                <div class="growerItem itemBox tree">
+                    <div class="growerItemMainBox itemBox">
+                        <p class="boxItem boxItemCost tree cost">1000</p>
+                        <p class="boxItem boxItemName tree button">Trees</p>
+                        <p class="boxItem boxItemCount tree count">0</p>
+                    </div>
+                    <div class="growerItemSubBox itemBox">
+                        <p class="boxItem boxItemDescription">Makes 10 apples every second</p>
+                        <p class="boxItem boxItemQuote">"Tree-t yourself"</p>
+                    </div>
+                </div>
+                <div class="growerItem itemBox acre">
+                    <div class="growerItemMainBox itemBox">
+                        <p class="boxItem boxItemCost acre cost">10000</p>
+                        <p class="boxItem boxItemName acre button">Acres</p>
+                        <p class="boxItem boxItemCount acre count">0</p>
+                    </div>
+                    <div class="growerItemSubBox itemBox">
+                        <p class="boxItem boxItemDescription">Makes 100 apples every second</p>
+                        <p class="boxItem boxItemQuote">"Acres away"</p>
+                    </div>
+                </div>
+                <div class="growerItem itemBox orchard">
+                    <div class="growerItemMainBox itemBox">
+                        <p class="boxItem boxItemCost orchard cost">100000</p>
+                        <p class="boxItem boxItemName orchard button">Orchards</p>
+                        <p class="boxItem boxItemCount orchard count">0</p>
+                    </div>
+                    <div class="growerItemSubBox itemBox">
+                        <p class="boxItem boxItemDescription">Makes 1000 apples every second</p>
+                        <p class="boxItem boxItemQuote">"Please sir, can I have some Mor-chards?"</p>
+                    </div>
+                </div>
             </div>
             <div class="gather">
                 <table>
@@ -77,7 +111,7 @@
                         <td class="count granny">0</td>
                     </tr>
                     <tr>
-                        <td class="sapling farmHand"><button>Farm Hand</button></td>
+                        <td class="button farmHand"><button>Farm Hand</button></td>
                         <td class="cost farmHand">10000</td>
 
                         <td class="count farmHand">0</td>
@@ -139,28 +173,8 @@
                 </table>
             </div> -->
         </section>
-        <div class="growerItem itemBox seed">
-            <div class="growerItemMainBox itemBox">
-                <p class="boxItem boxItemCost seed cost">10</p>
-                <p class="boxItem boxItemName seed button">Seed</p>
-                <p class="boxItem boxItemCount seed count">0</p>
-            </div>
-            <div class="growerItemSubBox itemBox">
-                <p class="boxItem boxItemDescription">Makes 1 apple every 10 seconds</p>
-                <p class="boxItem boxItemQuote">"Even the tallest redwood came from a tiny seed"</p>
-            </div>
-        </div>
-        <div class="growerItem itemBox">
-            <div class="growerItemMainBox itemBox">
-                <p class="boxItem boxItemCost">10</p>
-                <p class="boxItem boxItemName">Seed</p>
-                <p class="boxItem boxItemCount">0</p>
-            </div>
-            <div class="growerItemSubBox itemBox">
-                <p class="boxItem boxItemDescription">Makes 1 apple every 10 seconds</p>
-                <p class="boxItem boxItemQuote">"Even the tallest redwood came from a tiny seed"</p>
-            </div>
-        </div>
+       
+        
         
         <script type="text/javascript" src="js/main.js"></script>
     </body>
