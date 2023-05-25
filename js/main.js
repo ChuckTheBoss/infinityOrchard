@@ -18,8 +18,8 @@ let game = {
             { "currentCountGrannys": granny.count },
             { "currentCostFarmHands": farmHand.cost },
             { "currentCountFarmHands": farmHand.count },
-            { "currentCostPickers": picker.cost },
-            { "currentCountPickers": picker.count },
+            { "currentCostHarvesters": harvester.cost },
+            { "currentCountHarvesters": harvester.count },
         ]
     },
     saveGame: () => {
@@ -64,9 +64,9 @@ let game = {
             farmHand.cost = Number(localStorage.getItem("currentCostFarmHands"))
             farmHand.count = Number(localStorage.getItem("currentCountFarmHands"))
             farmHand.buy();
-            picker.cost = Number(localStorage.getItem("currentCostPickers"))
-            picker.count = Number(localStorage.getItem("currentCountPickers"))
-            picker.buy();
+            harvester.cost = Number(localStorage.getItem("currentCostHarvesters"))
+            harvester.count = Number(localStorage.getItem("currentCountHarvesters"))
+            harvester.buy();
             this.purchased = true;
             basket.clickTick();
             basket.ticker();
@@ -84,7 +84,7 @@ const dqa = (element) => { return document.querySelector(element) };
 // things I need to save: 
 //  total apples,
 //  seeds, sapplings, trees, acres, orchards. Count and cost
-//  grannys, farmhands, pickers, count and cost. 
+//  grannys, farmhands, harvesters, count and cost. 
 //  upgrades count and cost. 
 
 dq(".save").addEventListener("click", game.saveGame);
@@ -224,7 +224,7 @@ class Gather {
 
 let granny = new Gather("granny", 10, 1000);
 let farmHand = new Gather("farmHand", 100, 10000);
-let picker = new Gather("picker", 1000, 100000);
+let harvester = new Gather("harvester", 1000, 100000);
 
 // class GrowUpgrade {
 //     constructor(name, multiplier, cost, tiedTo) {
@@ -266,7 +266,7 @@ let picker = new Gather("picker", 1000, 100000);
 let bank = {
     capacity: 10,
     limit() { //limits apples/sec
-        this.capacity = (10 + (granny.multiply()) + (farmHand.multiply()) + (picker.multiply())) / game.fps;
+        this.capacity = (10 + (granny.multiply()) + (farmHand.multiply()) + (harvester.multiply())) / game.fps;
         if (basket.multiplier > bank.capacity) {
             return true;
         } else {

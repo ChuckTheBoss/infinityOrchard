@@ -16,6 +16,11 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
+        <nav class="topNav">
+            <button class="button save">Save Game!</button>
+            <button class="button load">Load Game!</button>
+        </nav>
+        
         <section class="appleBasketBank">
             <section class="mainApple">
                 <img
@@ -35,8 +40,6 @@
                     <h3 class="bank applesPerSec">apples/sec</h3>
                     
                 </div>
-                <button class="button save">Save Game!</button>
-                <button class="button load">Load Game!</button>
             </section>
 
         </section>
@@ -49,7 +52,7 @@
                         <p class="boxItem boxItemCount seed count">0</p>
                     </div>
                     <div class="growerItemSubBox itemBox">
-                        <p class="boxItem boxItemDescription">Makes 1 apple every 10 seconds</p>
+                        <p class="boxItem boxItemDescription">Grows 1 apple every 10 seconds</p>
                         <p class="boxItem boxItemQuote">"Even the tallest redwood came from a tiny seed"</p>
                     </div>
                 </div>
@@ -60,7 +63,7 @@
                         <p class="boxItem boxItemCount sapling count">0</p>
                     </div>
                     <div class="growerItemSubBox itemBox">
-                        <p class="boxItem boxItemDescription">Makes 1 apple every second</p>
+                        <p class="boxItem boxItemDescription">Grows 1 apple every second</p>
                         <p class="boxItem boxItemQuote">"Such a young sap"</p>
                     </div>
                 </div>
@@ -71,7 +74,7 @@
                         <p class="boxItem boxItemCount tree count">0</p>
                     </div>
                     <div class="growerItemSubBox itemBox">
-                        <p class="boxItem boxItemDescription">Makes 10 apples every second</p>
+                        <p class="boxItem boxItemDescription">Grows 10 apples every second</p>
                         <p class="boxItem boxItemQuote">"Tree-t yourself"</p>
                     </div>
                 </div>
@@ -82,7 +85,7 @@
                         <p class="boxItem boxItemCount acre count">0</p>
                     </div>
                     <div class="growerItemSubBox itemBox">
-                        <p class="boxItem boxItemDescription">Makes 100 apples every second</p>
+                        <p class="boxItem boxItemDescription">Grows 100 apples every second</p>
                         <p class="boxItem boxItemQuote">"Acres away"</p>
                     </div>
                 </div>
@@ -93,37 +96,45 @@
                         <p class="boxItem boxItemCount orchard count">0</p>
                     </div>
                     <div class="growerItemSubBox itemBox">
-                        <p class="boxItem boxItemDescription">Makes 1000 apples every second</p>
+                        <p class="boxItem boxItemDescription">Grows 1000 apples every second</p>
                         <p class="boxItem boxItemQuote">"Please sir, can I have some Mor-chards?"</p>
                     </div>
                 </div>
             </div>
             <div class="gather">
-                <table>
-                    <tr>
-                        <th>Gather</th>
-                        <th>Cost</th>
-                        <th>Owned</th>
-                    </tr>
-                    <tr>
-                        <td class="button granny"><button>Granny Smith</button></td>
-                        <td class="cost granny">1000</td>
-                        <td class="count granny">0</td>
-                    </tr>
-                    <tr>
-                        <td class="button farmHand"><button>Farm Hand</button></td>
-                        <td class="cost farmHand">10000</td>
-
-                        <td class="count farmHand">0</td>
-                    </tr>
-                    <tr>
-                        <td class="button picker">
-                            <button>Apple Pickers</button>
-                        </td>
-                        <td class="cost picker">100000</td>
-                        <td class="count picker">0</td>
-                    </tr>
-                </table>
+                <div class="gatherItem itemBox granny">
+                    <div class="gatherItemMainBox itemBox">
+                        <p class="boxItem boxItemCost granny cost">1000</p>
+                        <p class="boxItem boxItemName granny button">Granny</p>
+                        <p class="boxItem boxItemCount granny count">0</p>
+                    </div>
+                    <div class="growerItemSubBox itemBox">
+                        <p class="boxItem boxItemDescription">Gathers 10 more apples/sec</p>
+                        <p class="boxItem boxItemQuote">"Smith is the name and apples are my game"</p>
+                    </div>
+                </div>
+                <div class="gatherItem itemBox farmHand">
+                    <div class="gatherItemMainBox itemBox">
+                        <p class="boxItem boxItemCost farmHand cost">10000</p>
+                        <p class="boxItem boxItemName farmHand button">Farm Hand</p>
+                        <p class="boxItem boxItemCount farmHand count">0</p>
+                    </div>
+                    <div class="growerItemSubBox itemBox">
+                        <p class="boxItem boxItemDescription">Gathers 100 more apples/sec</p>
+                        <p class="boxItem boxItemQuote">"Honest pay for an honest days work"</p>
+                    </div>
+                </div>
+                <div class="gatherItem itemBox harvester">
+                    <div class="gatherItemMainBox itemBox">
+                        <p class="boxItem boxItemCost harvester cost">100000</p>
+                        <p class="boxItem boxItemName harvester button">Harvester</p>
+                        <p class="boxItem boxItemCount harvester count">0</p>
+                    </div>
+                    <div class="growerItemSubBox itemBox">
+                        <p class="boxItem boxItemDescription">Gathers 1000 more apples/sec</p>
+                        <p class="boxItem boxItemQuote">"Uses modern technologies like baskets and shears"</p>
+                    </div>
+                </div>
             </div>
            
             <!-- <div class="upgrade">

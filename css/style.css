@@ -30,9 +30,29 @@ body {
 /******************************************
 /* LAYOUT
 /*******************************************/
-header {}
+
+/* NAVIGATION BAR */
+
+.topNav {
+  background: radial-gradient(ellipse closest-side, green 20%, transparent);
+  padding: 15px;
+}
+
+.button {
+  padding: 10px;
+  font-size: 1rem;
+  margin: 10px;
+}
 
 /* APPLE BASKET AND BANK */
+.appleBasketBank {
+  margin: 5%;
+}
+
+.appleBasketBank * {
+  margin: 5px;
+}
+
 .basketContainer,
 .bankContainer {
   background: radial-gradient(ellipse closest-side, green 20%, transparent);
@@ -67,30 +87,70 @@ header {}
 }
 
 /* GROWERS */
-.thingsToBuy {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap;
+
+
+
+
+
+
+.grow,
+.gather {
+  width: 45%;
 }
 
-.growerItem {
+.growerItem,
+.gatherItem {
   background: radial-gradient(at 0% 0%, rgb(104, 49, 49), green 40%, transparent 90%);
   border: ridge 15px rgb(104, 49, 49);
   padding: 15px;
 }
 
-.growerItemMainBox {
+.growerItemMainBox,
+.gatherItemMainBox {
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 100px;
 }
 
-.growerItem * {
+.growerItem *,
+.gatherItem * {
   margin: 10px;
 }
 
+@media screen and (min-width: 1025px) {
+  .thingsToBuy {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .thingsToBuy {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .growerItemMainBox,
+  .gatherItemMainBox {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 150px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .thingsToBuy {
+    display: block;
+  }
+
+  .growerItemBox,
+  .gatherItemBox {
+    margin: auto;
+    height: 100px;
+  }
+}
 
 .boxItemImage {
   flex-shrink: 1;
