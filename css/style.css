@@ -21,11 +21,29 @@
 /* BASE
 /*******************************************/
 
-body {
+html {
   text-align: center;
-  width: auto;
+  font-size: 16px;
 }
 
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+body {
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
+}
+
+.pointer {
+  cursor: pointer;
+}
 
 /******************************************
 /* LAYOUT
@@ -38,10 +56,16 @@ body {
   padding: 15px;
 }
 
+@media screen and (max-width: 769px) {
+  .topNav {
+    padding: 5px;
+  }
+}
+
 .button {
   padding: 10px;
   font-size: 1rem;
-  margin: 10px;
+  margin: 0.5%;
 }
 
 /* APPLE BASKET AND BANK */
@@ -67,8 +91,23 @@ body {
 }
 
 #mainApple {
-  width: 25%;
-  margin: 7% 0;
+  width: 50%;
+}
+
+@media screen and (min-width: 1025px) {
+  #mainApple {
+    width: 25%;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  #mainApple {
+    width: 30%;
+  }
+}
+
+.mainApple {
+  margin: 2em;
 }
 
 .basket {
@@ -88,11 +127,6 @@ body {
 
 /* GROWERS */
 
-
-
-
-
-
 .grow,
 .gather {
   width: 45%;
@@ -103,19 +137,41 @@ body {
   background: radial-gradient(at 0% 0%, rgb(104, 49, 49), green 40%, transparent 90%);
   border: ridge 15px rgb(104, 49, 49);
   padding: 15px;
+  height: 250px;
 }
 
 .growerItemMainBox,
 .gatherItemMainBox {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 100px;
+  justify-content: space-between;
+  align-content: center;
 }
 
 .growerItem *,
 .gatherItem * {
   margin: 10px;
+}
+
+.boxItem {
+  display: block;
+}
+
+.boxItemName {
+  width: 60%;
+}
+
+.boxItemCost,
+.boxItemCount {
+  margin: auto 0;
+  width: 20%;
+}
+
+.boxItemCost {
+  text-align: left;
+}
+
+.boxItemCount {
+  text-align: right;
 }
 
 @media screen and (min-width: 1025px) {
@@ -125,18 +181,15 @@ body {
   }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (max-width: 1024px) {
   .thingsToBuy {
     display: flex;
     justify-content: space-around;
   }
 
-  .growerItemMainBox,
-  .gatherItemMainBox {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 150px !important;
+  .growerItem,
+  .gatherItem {
+    height: 350px;
   }
 }
 
@@ -145,38 +198,34 @@ body {
     display: block;
   }
 
-  .growerItemBox,
-  .gatherItemBox {
+  .growerItem,
+  .gatherItem {
+    height: 250px;
+    font-size: 1.5em;
+  }
+
+  .grow,
+  .gather {
+    display: block;
     margin: auto;
-    height: 100px;
+    width: auto;
   }
 }
 
-.boxItemImage {
-  flex-shrink: 1;
-}
+.boxItemImage {}
 
-.boxItemCost {
-  flex-basis: 10%;
-  flex-shrink: 0;
+.boxItemCost,
+.boxItemCount {
   font-size: .75em;
 }
 
 .boxItemName {
-  flex-basis: 40%;
-  flex-grow: 2;
   font-size: 2em;
-  justify-self: center;
-}
-
-.boxitemCount {
-  flex-basis: 20%;
-  flex-shrink: 0;
-  font-size: .75em;
 }
 
 .boxItemDescription {
   font-size: .75em;
+  font-weight: thin;
   font-style: italic;
   text-align: left;
 }

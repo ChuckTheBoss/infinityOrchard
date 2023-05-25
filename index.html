@@ -15,10 +15,10 @@
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/style.css" />
     </head>
-    <body>
+    <body class="disableSelect">
         <nav class="topNav">
-            <button class="button save">Save Game!</button>
-            <button class="button load">Load Game!</button>
+            <button class="button save pointer">Save Game!</button>
+            <button class="button load pointer">Load Game!</button>
         </nav>
         
         <section class="appleBasketBank">
@@ -28,6 +28,7 @@
                     alt="A big, bright, shiny, juicy apple."
                     id="mainApple"
                     draggable="false"
+                    class=" pointer"
                 />
             </section>
             <section class="basketBankSave">
@@ -45,7 +46,7 @@
         </section>
         <section class="thingsToBuy">
             <div class="grow">
-                <div class="growerItem itemBox seed">
+                <div class="growerItem itemBox seed  pointer">
                     <div class="growerItemMainBox itemBox">
                         <p class="boxItem boxItemCost seed cost">10</p>
                         <p class="boxItem boxItemName seed button">Seeds</p>
@@ -56,7 +57,7 @@
                         <p class="boxItem boxItemQuote">"Even the tallest redwood came from a tiny seed"</p>
                     </div>
                 </div>
-                <div class="growerItem itemBox sapling">
+                <div class="growerItem itemBox sapling pointer">
                     <div class="growerItemMainBox itemBox">
                         <p class="boxItem boxItemCost sapling cost">100</p>
                         <p class="boxItem boxItemName sapling button">Saplings</p>
@@ -67,7 +68,7 @@
                         <p class="boxItem boxItemQuote">"Such a young sap"</p>
                     </div>
                 </div>
-                <div class="growerItem itemBox tree">
+                <div class="growerItem itemBox tree pointer">
                     <div class="growerItemMainBox itemBox">
                         <p class="boxItem boxItemCost tree cost">1000</p>
                         <p class="boxItem boxItemName tree button">Trees</p>
@@ -78,7 +79,7 @@
                         <p class="boxItem boxItemQuote">"Tree-t yourself"</p>
                     </div>
                 </div>
-                <div class="growerItem itemBox acre">
+                <div class="growerItem itemBox acre pointer">
                     <div class="growerItemMainBox itemBox">
                         <p class="boxItem boxItemCost acre cost">10000</p>
                         <p class="boxItem boxItemName acre button">Acres</p>
@@ -89,7 +90,7 @@
                         <p class="boxItem boxItemQuote">"Acres away"</p>
                     </div>
                 </div>
-                <div class="growerItem itemBox orchard">
+                <div class="growerItem itemBox orchard pointer">
                     <div class="growerItemMainBox itemBox">
                         <p class="boxItem boxItemCost orchard cost">100000</p>
                         <p class="boxItem boxItemName orchard button">Orchards</p>
@@ -102,7 +103,7 @@
                 </div>
             </div>
             <div class="gather">
-                <div class="gatherItem itemBox granny">
+                <div class="gatherItem itemBox granny pointer">
                     <div class="gatherItemMainBox itemBox">
                         <p class="boxItem boxItemCost granny cost">1000</p>
                         <p class="boxItem boxItemName granny button">Granny</p>
@@ -113,7 +114,7 @@
                         <p class="boxItem boxItemQuote">"Smith is the name and apples are my game"</p>
                     </div>
                 </div>
-                <div class="gatherItem itemBox farmHand">
+                <div class="gatherItem itemBox farmHand pointer">
                     <div class="gatherItemMainBox itemBox">
                         <p class="boxItem boxItemCost farmHand cost">10000</p>
                         <p class="boxItem boxItemName farmHand button">Farm Hand</p>
@@ -124,7 +125,7 @@
                         <p class="boxItem boxItemQuote">"Honest pay for an honest days work"</p>
                     </div>
                 </div>
-                <div class="gatherItem itemBox harvester">
+                <div class="gatherItem itemBox harvester pointer">
                     <div class="gatherItemMainBox itemBox">
                         <p class="boxItem boxItemCost harvester cost">100000</p>
                         <p class="boxItem boxItemName harvester button">Harvester</p>
