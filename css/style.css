@@ -26,6 +26,12 @@ html {
   font-size: 16px;
 }
 
+@media screen and (max-width: 1220px) {
+  html {
+    font-size: 8px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   html {
     font-size: 8px;
@@ -43,6 +49,15 @@ body {
 
 .pointer {
   cursor: pointer;
+}
+
+img {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  touch-action: none;
 }
 
 /******************************************
@@ -92,6 +107,7 @@ body {
 
 #mainApple {
   width: 50%;
+
 }
 
 @media screen and (min-width: 1025px) {
@@ -289,12 +305,11 @@ html {
   background-image: url("../assets/images/small-orchard.jpg");
   background-repeat: no-repeat;
   background-position: center center;
-
   background-size: cover;
 }
 
 body {
   color: white;
   font-size: 2rem;
-  font-family: 'Cabin', sans-serif;
+  font-family: 'Anonymous Pro', monospace;
 }

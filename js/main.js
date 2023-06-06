@@ -76,9 +76,11 @@ let game = {
     }
 };
 
+
 //I use document.querySelector a lot, so this just makes it so I don't have to type it every time. 
 const dq = (element) => { return document.querySelector(element) };
 const dqa = (element) => { return document.querySelector(element) };
+
 
 //SAVE GAME
 // things I need to save: 
@@ -89,6 +91,12 @@ const dqa = (element) => { return document.querySelector(element) };
 
 dq(".save").addEventListener("click", game.saveGame);
 dq(".load").addEventListener("click", game.loadGame);
+dq('#mainApple').oncontextmenu = function (event) { // fixes long-pressing on the apple on mobile bringing up the image in a new window. 
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    return false;
+};
 // Basket contains the apple countand some associated functions
 let basket = {
     apples: 0,
