@@ -60,6 +60,10 @@ img {
   touch-action: none;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /******************************************
 /* LAYOUT
 /*******************************************/
@@ -81,6 +85,24 @@ img {
   padding: 10px;
   font-size: 1rem;
   margin: 0.5%;
+}
+
+.gameSaved {
+  font-size: 2em;
+  position: absolute;
+  left: 40%;
+  z-index: 1;
+  animation: 1s linear fadeOut;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
 
 /* APPLE BASKET AND BANK */
@@ -265,7 +287,6 @@ footer {}
 /* Big Apple */
 
 #mainApple {
-
   animation: 30s infinite linear rotate;
   transition: all 1s ease-out;
 }

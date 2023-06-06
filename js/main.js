@@ -31,7 +31,16 @@ let game = {
                 localStorage.setItem(Object.keys(obj), Object.values(obj))
             }
         });
+        dq(".gameSaved").classList.remove("hidden")
+        setTimeout(() => dq(".gameSaved").classList.add("hidden"), 1000)
+        game.autoSave();
         console.log(localStorage);
+    },
+    autoSave: () => {
+        if (!game.autoSaveInterval) {
+            setInterval(game.saveGame, 60000);
+            game.autoSaveInterval = true;
+        }
     },
     loadGame: () => {
         game.saveData().forEach(obj => {
@@ -73,7 +82,9 @@ let game = {
             startGrowing();
         });
         console.log(localStorage);
-    }
+        game.autoSave();
+    },
+    autoSaveInterval: false
 };
 
 
