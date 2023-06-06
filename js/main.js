@@ -245,41 +245,40 @@ let granny = new Gather("granny", 10, 1000);
 let farmHand = new Gather("farmHand", 100, 10000);
 let harvester = new Gather("harvester", 1000, 100000);
 
-// class GrowUpgrade {
-//     constructor(name, multiplier, cost, tiedTo) {
-//         this.name = name;
-//         this.multiplier = multiplier;
-//         this.cost = cost;
-//         this.tiedTo = tiedTo;
-//         this.purchased = false;
-//         this.count = 0;
-//         dq(`.${this.name}`).addEventListener("click", this.buy.bind(this));
-//         dq(`.${this.name}.count`).innerText = this.count;
-//     };
-//     multiply() {
-//         const upgradeTarget = this.tiedTo;
-//         upgradeTarget.multiplier *= (this.multiplier);
-//     };
-//     buy() {
-//         if (basket.apples >= this.cost) {
-//             basket.apples -= this.cost;
-//             this.purchased = true;
-//             this.cost *= 1.1;
-//             this.count += 1;
-//             this.multiply();
-//             dq(".basket").innerText = Math.floor(basket.apples);
-//             dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
-//             dq(`.${this.name}.count`).innerText = this.count;
-//             dq(`.${this.name}`).removeEventListener("click", this.buy.bind(this))
-//             console.log(basket.multiplier);
-//         }
-//     };
-// };
+class Tool {
+    constructor(name, multiplier, cost, tiedTo) {
+        this.name = name;
+        this.multiplier = multiplier;
+        this.cost = cost;
+        this.tiedTo = tiedTo;
+        this.purchased = false;
+        this.count = 0;
+        dq(`.${this.name}`).addEventListener("click", this.buy.bind(this));
+        dq(`.${this.name}.count`).innerText = this.count;
+    };
+    multiply() {
+        const upgradeTarget = this.tiedTo;
+        upgradeTarget.multiplier *= (this.multiplier);
+    };
+    buy() {
+        if (basket.apples >= this.cost) {
+            basket.apples -= this.cost;
+            this.purchased = true;
+            this.count += 1;
+            this.multiply();
+            dq(".basket").innerText = Math.floor(basket.apples);
+            dq(`.${this.name}.cost`).innerText = Math.floor(this.cost);
+            dq(`.${this.name}.count`).innerText = this.count;
+            dq(`.${this.name}`).classList.add("hidden")
+            console.log(basket.multiplier);
+        }
+    };
+};
 
-// let fertilizer = new GrowUpgrade("fertilizer", 1.1, 100, seed)
-// let tiller = new GrowUpgrade("tiller", 1.1, 1000, sapling)
-// let automaticSprinklers = new GrowUpgrade("automaticSprinklers", 1.1, 10000, tree)
-// let glasses = new GrowUpgrade("glasses", 1.1, 1000, granny)
+let fertilizer = new Tool("fertilizer", 2, 500, seed)
+let tiller = new Tool("tiller", 2, 5000, sapling)
+let automaticSprinklers = new Tool("automaticSprinklers", 2, 50000, tree)
+let glasses = new Tool("glasses", 2, 5000, granny)
 
 
 let bank = {
